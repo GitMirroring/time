@@ -234,9 +234,9 @@ Usage: %s [-apvV] [-f format] [-o file] [--append] [--verbose]\n\
   -o, --output=FILE         write to FILE instead of STDERR\n"), stdout);
   fputs (_("\
   -p, --portability         print POSIX standard 1003.2 conformant string:\n\
-                              real %%e\n\
-                              user %%U\n\
-                              sys %%S\n\
+                              real %e\n\
+                              user %U\n\
+                              sys %S\n\
 "), stdout);
   fputs (_("\
   -q, --quiet               do not print information about abnormal program\n\
