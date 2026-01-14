@@ -58,7 +58,7 @@ compare_ out-default exp-default || fail=1
 ##
 ## -q output
 ##
-## originally from Debian, "-q" supresses the "command exited..." message
+## originally from Debian, "-q" suppresses the "command exited..." message
 
 cat<<EOF > exp-q  || framework_failure_ "failed to write exp-q"
 user system :elapsed %CPU (avgtext+avgdata maxresident)k

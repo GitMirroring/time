@@ -22,8 +22,11 @@ update-copyright-env = \
 
 local-checks-to-skip = \
   sc_bindtextdomain \
+  sc_indent \
   sc_unmarked_diagnostics
 
 exclude_file_name_regexp--sc_require_config_h_first = ^tests/time-aux\.c$
 exclude_file_name_regexp--sc_require_config_h = \
   $(exclude_file_name_regexp--sc_require_config_h_first)
+
+codespell_ignore_words_list = resuse,Ooutputs

@@ -336,7 +336,7 @@ signal.
 
 @item %Tn
 Numeric signal code @emph{if} the command was terminated by a signal (e.g.,
-the value @samp{9} if the program was terminted by SIGKILL).
+the value @samp{9} if the program was terminated by SIGKILL).
 Empty if the program exited normally (i.e., not terminated by a signal).
 
 @item %Ts

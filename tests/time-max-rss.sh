@@ -46,7 +46,7 @@ d=$(( c - b ))
 test "$b" -eq "0" && test "$c" -eq 0 \
   && skip_ "getrusage(2) returns zero in ru_maxrss"
 
-# There could be alot of variation between each invocation,
+# There could be a lot of variation between each invocation,
 # accept a reasonable range
 if test "$d" -ge 5000 && test "$d" -le 6000 ; then
     : # acceptable values: 5000-6000 KB

@@ -21,7 +21,7 @@
 #define _RESUSE_H 1
 
 
-/* Convert rusage's microseconds to miliseconds */
+/* Convert rusage's microseconds to milliseconds */
 #define TV_MSEC tv_usec / 1000
 
 

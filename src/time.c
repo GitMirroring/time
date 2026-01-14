@@ -39,7 +39,7 @@
 #include <unistd.h>
 #include "sig2str.h"
 #include "progname.h"
-#include "error.h"
+#include <error.h>
 #define Version VERSION
 #include "version-etc.h"
 
@@ -144,7 +144,7 @@ static const char *const posix_format = "real %e\nuser %U\nsys %S";
    Keep this output to 24 lines so users on terminals can see it all.
 
    The format string is used two ways: as a format string, and in
-   verbose mode, to document all the possible formatting possiblities.
+   verbose mode, to document all the possible formatting possibilities.
    When `longstats' is used as a format string, it has to be put into
    one contiguous string (e.g., into a `char[]').  We could alternatively
    store it as a `char *' and convert it into a `*char[]' when we need
