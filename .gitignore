@@ -28,6 +28,7 @@
 /test-suite.log
 /tests/*.log
 /tests/*.trs
+/tests/init.sh
 /tests/time-aux
 /tests/.deps
 
