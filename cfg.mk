@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-old_NEWS_hash = 4ce152f3bbca3f5c45ab10331e4f9877
+old_NEWS_hash = 3702ab788541f5a222d97219516b5096
 
 update-copyright-env = \
   UPDATE_COPYRIGHT_USE_INTERVALS=1 \

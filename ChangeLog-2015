@@ -240,3 +240,12 @@ Sun Apr  1 23:46:30 1990  Jim Kingdon  (kingdon at pogo.ai.mit.edu)
 Fri Jan 19 14:40:48 EST 1990			hack@wookumz
 
 	time.c  Change exit(errno) to exit(1) 
+
+
+	-----
+
+	Copyright (C) 1990-2021, 2026 Free Software Foundation, Inc.
+
+	Copying and distribution of this file, with or without
+	modification, are permitted provided the copyright notice
+	and this notice are preserved.
