@@ -26,22 +26,6 @@
 #include <sys/wait.h>
 #include <sys/resource.h>
 
-#if !HAVE_WAIT3
-# include <sys/times.h>
-# ifndef HZ
-#  include <sys/param.h>
-# endif
-# if !defined HZ && defined CLOCKS_PER_SEC
-#  define HZ CLOCKS_PER_SEC
-# endif
-# if !defined HZ && defined CLK_TCK
-#  define HZ CLK_TCK
-# endif
-# ifndef HZ
-#  define HZ 60
-# endif
-#endif
-
 #include "resuse.h"
 
 /* Prepare to measure a child process.  */
@@ -49,65 +33,23 @@
 void
 resuse_start (RESUSE *resp)
 {
-#if HAVE_WAIT3
   gettimeofday (&resp->start, (struct timezone *) 0);
-#else
-  long value;
-  struct tms tms;
-
-  value = times (&tms);
-  resp->start.tv_sec = value / HZ;
-  resp->start.tv_usec = value % HZ * (1000000 / HZ);
-#endif
 }
 
 /* Wait for and fill in data on child process PID.
    Return 0 on error, 1 if ok.  */
 
-/* pid_t is short on BSDI, so don't try to promote it.  */
 int
 resuse_end (pid_t pid, RESUSE *resp)
 {
   int status;
 
-#if HAVE_WAIT3
-  pid_t caught;
-
-  /* Ignore signals, but don't ignore the children.  When wait3
-     returns the child process, set the time the command finished. */
-  while ((caught = wait3 (&status, 0, &resp->ru)) != pid)
-    {
-      if (caught == -1)
-	return 0;
-    }
-
-  gettimeofday (&resp->elapsed, (struct timezone *) 0);
-#else  /* !HAVE_WAIT3 */
-  long value;
-  struct tms tms;
-
-  pid = wait (&status);
-  if (pid == -1)
+  /* Wait for the child process and get its resource usage.  */
+  if (waitpid (pid, &status, 0) < 0
+      || getrusage (RUSAGE_CHILDREN, &resp->ru) < 0)
     return 0;
 
-  value = times (&tms);
-
-  memset (&resp->ru, 0, sizeof (struct rusage));
-
-  resp->ru.ru_utime.tv_sec = tms.tms_cutime / HZ;
-  resp->ru.ru_stime.tv_sec = tms.tms_cstime / HZ;
-
-#if HAVE_SYS_RUSAGE_H
-  resp->ru.ru_utime.tv_nsec = tms.tms_cutime % HZ * (1000000000 / HZ);
-  resp->ru.ru_stime.tv_nsec = tms.tms_cstime % HZ * (1000000000 / HZ);
-#else
-  resp->ru.ru_utime.tv_usec = tms.tms_cutime % HZ * (1000000 / HZ);
-  resp->ru.ru_stime.tv_usec = tms.tms_cstime % HZ * (1000000 / HZ);
-#endif
-
-  resp->elapsed.tv_sec = value / HZ;
-  resp->elapsed.tv_usec = value % HZ * (1000000 / HZ);
-#endif  /* !HAVE_WAIT3 */
+  gettimeofday (&resp->elapsed, (struct timezone *) 0);
 
   resp->elapsed.tv_sec -= resp->start.tv_sec;
   if (resp->elapsed.tv_usec < resp->start.tv_usec)

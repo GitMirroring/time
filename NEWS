@@ -2,6 +2,10 @@ GNU time NEWS                                         -*- outline -*-
 
 * Noteworthy changes in release ?.? (????-??-??) [?]
 
+** Improvements
+
+  time now uses the more portable waitpid and getrusage system calls
+  instead of wait3.
 
 * Noteworthy changes in release 1.9 (2018-03-12) [stable]
 
