@@ -20,7 +20,7 @@
 # along with GNU time.  If not, see <http://www.gnu.org/licenses/>.
 
 # Written by Assaf Gordon
-. "${test_dir=.}/init.sh"
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src
 
 which false > /dev/null || skip_ "'false' program required for this test"
 which sed > /dev/null || skip_ "'sed' program required for this test"

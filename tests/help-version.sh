@@ -22,7 +22,7 @@
 
 # This test script was heavily copied from GNU sed's "help-version.sh"
 
-. "${test_dir=.}/init.sh"
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src
 
 # VERSION should be set in Makefile.am
 test "$VERSION" \

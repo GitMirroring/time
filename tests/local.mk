@@ -46,9 +46,10 @@ all_tests =			\
 #       see also stderr_fileno in 'init.cfg'
 TESTS_ENVIRONMENT = \
   top_srcdir=$(abs_top_srcdir) \
+  srcdir='$(srcdir)' \
   PATH='$(abs_top_builddir)$(PATH_SEPARATOR)$(abs_top_builddir)/tests$(PATH_SEPARATOR)'$$PATH \
   LC_ALL=C \
   VERSION='$(VERSION)' \
   test_dir='$(abs_top_srcdir)/tests' ; \
-  export top_srcdir PATH LC_ALL VERSION test_dir ; \
+  export top_srcdir PATH LC_ALL VERSION srcdir; \
   9>&2

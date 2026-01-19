@@ -17,6 +17,7 @@
 /Makefile.in
 
 /src/.deps
+/src/time
 /src/version.c
 /src/version.h
 
@@ -25,8 +26,6 @@
 /doc/version.texi
 /stamp-h1
 /stamp.h*
-
-/time
 
 /test-suite.log
 /tests/*.log
