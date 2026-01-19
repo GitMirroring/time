@@ -21,3 +21,10 @@ info_TEXINFOS = doc/time.texi
 doc_time_TEXINFOS =	\
   doc/fdl.texi		\
   doc/version.texi
+
+# The customization variable CHECK_NORMAL_MENU_STRUCTURE is necessary with
+# makeinfo versions ≥ 6.8.
+AM_MAKEINFOFLAGS = -c CHECK_NORMAL_MENU_STRUCTURE=1
+
+# Tell makeinfo to put everything in a single info file: <package>.info.
+AM_MAKEINFOFLAGS += --no-split
