@@ -163,22 +163,22 @@ static char const *verbose_format =
    "\tExit status: %x");
 
 /* If true, show an English description next to each statistic.  */
-static bool verbose;
+static bool verbose = false;
 
 /* Name of output file.  Only used if -o option is given.  */
-static const char *outfile;
+static const char *outfile = NULL;
 
 /* Output stream, stderr by default.  */
-static FILE *outfp;
+static FILE *outfp = NULL;
 
 /* If true, append to `outfile' rather than truncating it.  */
-static bool append;
+static bool append = false;
 
 /* The output format string.  */
-static const char *output_format;
+static const char *output_format = default_format;
 
 /* Quiet mode: do not print info about abnormal terminations */
-static bool quiet;
+static bool quiet = false;
 
 static struct option const longopts[] =
 {
@@ -642,13 +642,6 @@ getargs (int argc, char **argv)
   int optc;
   char *format;			/* Format found in environment.  */
 
-  /* Initialize the option flags.  */
-  verbose = false;
-  outfile = NULL;
-  outfp = stderr;
-  append = false;
-  output_format = default_format;
-
   /* Set the format string from the environment.  Do this before checking
      the args so that we won't clobber a user-specified format.  */
   format = getenv ("TIME");
@@ -695,7 +688,9 @@ getargs (int argc, char **argv)
       usage (EXIT_CANCELED);
     }
 
-  if (outfile)
+  if (! outfile)
+    outfp = stderr;
+  else
     {
       if (append)
 	outfp = fopen (outfile, "a");
