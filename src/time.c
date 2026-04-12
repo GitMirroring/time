@@ -716,7 +716,7 @@ run_command (const char **cmd, RESUSE *resp)
   sighandler_t interrupt_signal, quit_signal;
   int saved_errno;
 
-  resuse_start (resp);
+  resp->start_time = current_timespec ();
 
   pid = fork ();		/* Run CMD as child process.  */
   if (pid < 0)
@@ -737,8 +737,14 @@ run_command (const char **cmd, RESUSE *resp)
   interrupt_signal = signal (SIGINT, SIG_IGN);
   quit_signal = signal (SIGQUIT, SIG_IGN);
 
-  if (resuse_end (pid, resp) == 0)
+  if (waitpid (pid, &resp->waitstatus, 0) < 0)
     error (EXIT_FAILURE, errno, "error waiting for child process");
+
+  resp->end_time = current_timespec ();
+
+  if (getrusage (RUSAGE_CHILDREN, &resp->ru) < 0)
+    error (EXIT_FAILURE, errno,
+           "error getting resource usage for child process");
 
   /* Re-enable signals.  */
   signal (SIGINT, interrupt_signal);
