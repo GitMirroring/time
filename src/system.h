@@ -17,6 +17,7 @@
 /* Include this file _after_ system headers if possible.  */
 
 #include <limits.h>
+#include <stdckdint.h>
 
 #include "unlocked-io.h"
 
