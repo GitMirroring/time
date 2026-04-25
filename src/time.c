@@ -766,6 +766,8 @@ main (int argc, char **argv)
   RESUSE res;
   int status;
 
+  setlocale (LC_ALL, "");
+
   set_program_name (argv[0]);
   command_line = getargs (argc, argv);
   run_command (command_line, &res);
