@@ -747,7 +747,7 @@ run_command (const char **cmd, RESUSE *resp)
 
   while (waitpid (pid, &resp->waitstatus, 0) < 0)
     {
-      if (errno == EINTR)
+      if (errno != EINTR)
         error (EXIT_FAILURE, errno, "error waiting for child process");
     }
 
