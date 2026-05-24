@@ -745,8 +745,11 @@ run_command (const char **cmd, RESUSE *resp)
   sighandler_t interrupt_signal = signal (SIGINT, SIG_IGN);
   sighandler_t quit_signal = signal (SIGQUIT, SIG_IGN);
 
-  if (waitpid (pid, &resp->waitstatus, 0) < 0)
-    error (EXIT_FAILURE, errno, "error waiting for child process");
+  while (waitpid (pid, &resp->waitstatus, 0) < 0)
+    {
+      if (errno == EINTR)
+        error (EXIT_FAILURE, errno, "error waiting for child process");
+    }
 
   resp->end_time = current_timespec ();
 

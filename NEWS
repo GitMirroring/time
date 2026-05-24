@@ -2,6 +2,12 @@ GNU time NEWS                                         -*- outline -*-
 
 * Noteworthy changes in release ?.? (????-??-??) [?]
 
+** Bug fixes
+
+  time no longer fails when the waitpid system call is interrupted by an
+  unblocked signal.  This could sometimes be seen when using job control.
+  [This bug was present in "the beginning".]
+
 ** Improvements
 
   time now sets the locale so that strerror(3) returns localized error strings
