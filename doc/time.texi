@@ -504,6 +504,20 @@ Options to @code{time} must appear on the command line before
 @var{command}.  Anything on the command line after @var{command} is
 passed as arguments to @var{command}.
 
+@c This macro is taken from GNU coreutils.
+@macro mayConflictWithShellBuiltIn{cmd}
+@cindex conflicts with shell built-ins
+@cindex built-in shell commands, conflicts with
+Due to shell aliases and built-in @command{\cmd\} functions, using an
+unadorned @command{\cmd\} interactively or in a script may get you
+different functionality than that described here.  Invoke it via
+@command{env} (i.e., @code{env \cmd\ @dots{}}) to avoid interference
+from the shell.
+
+@end macro
+
+@mayConflictWithShellBuiltIn{time}
+
 @table @code
 @item -o @var{file}
 @itemx --output=@var{file}
